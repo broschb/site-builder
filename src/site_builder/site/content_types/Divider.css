@@ -1,0 +1,7 @@
+.is-divider-custom{
+  display: block;
+  position: relative;
+  height: .1rem;
+  margin: 2rem 0;
+  text-align: center;
+}

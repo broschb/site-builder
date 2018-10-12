@@ -1,0 +1,7 @@
+TODO and stuff to review
+create-react-app sass
+https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-css-preprocessor-sass-less-etc
+
+usage of bulma
+https://hackernoon.com/building-a-website-with-react-and-bulma-d655214bff2a
+
