@@ -17,10 +17,6 @@ class Image extends React.Component {
   updatePicture(pictureFiles, pictureDataURLs) {
   console.log(pictureFiles)
   console.log(pictureDataURLs)
-    // this.setState({
-    //   color: color.color,
-    //   alpha: color.alpha
-    // }, this.updateProps);
   }
 
   updateUrlValue(evt){
