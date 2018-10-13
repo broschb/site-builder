@@ -1,12 +1,9 @@
 .draggable{
   outline: rgb(10, 155, 240) solid;
-   /* border:dashed 1px #aaaaaa; */
-   /* font-size: 1.2em; */
 }
 
 .selected {
   outline: #35ac05 solid;
-  /* font-size: 1.2em; */
 }
 
 .draggable-handle:hover{
