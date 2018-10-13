@@ -1,7 +1,9 @@
 {
   "name": "site-builder",
   "version": "0.1.0",
-  "private": true,
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": ["dist", "README.md"],
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
     "@fortawesome/free-brands-svg-icons": "^5.1.0-11",
@@ -12,14 +14,11 @@
     "lodash": "^4.17.11",
     "prismjs": "^1.15.0",
     "rc-color-picker": "^1.2.6",
-    "react": "^16.4.1",
     "react-dnd": "^5.0.0",
     "react-dnd-html5-backend": "^5.0.1",
-    "react-dom": "^16.4.1",
     "react-images-upload": "^1.2.3",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
-    "react-scripts": "1.1.4",
     "react-simple-code-editor": "^0.6.1",
     "react-tinymce": "^0.7.0",
     "redux": "^4.0.0",
@@ -27,9 +26,18 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "react": "^16.4.1",
+    "react-scripts": "1.1.4",
+    "react-dom": "^16.4.1",
+    "babel-cli": "^6.26.0"
+  },
+  "peerDependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  }
 }
