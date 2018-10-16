@@ -1,0 +1,43 @@
+.draggable{
+  outline: rgb(10, 155, 240) solid;
+}
+
+.selected {
+  outline: #35ac05 solid;
+}
+
+.draggable-handle:hover{
+  cursor: move;
+}
+
+.drag-wrapper{
+  position: relative;
+}
+
+span.grippy {
+  z-index: 1;
+  content: '....';
+  width: 10px;
+  height: 20px;
+  position: absolute;
+  top: calc(100% - 65%);
+  left: 0;
+  cursor: move;
+  font-size: 12px;
+  font-family: sans-serif;
+  letter-spacing: 2px;
+  color: #cccccc;
+  text-shadow: 1px 0 1px black;
+
+  /* display: inline-block; */
+  /* overflow: hidden; */
+  line-height: 5px;
+  /* padding: 3px 4px; */
+  /* vertical-align: middle; */
+  /* margin-top: -.7em; */
+  /* margin-right: .3em; */
+}
+
+span.grippy::after {
+  content: '.. .. .. ..';
+}
