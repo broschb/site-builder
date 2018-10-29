@@ -31,7 +31,7 @@ var Site = function (_React$Component) {
         React.createElement(
           SharedSiteProvider,
           null,
-          React.createElement(Grid, null)
+          React.createElement(Grid, this.props)
         )
       );
     }

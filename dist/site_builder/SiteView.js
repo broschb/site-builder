@@ -6,42 +6,51 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import React, { Component } from 'react';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import './App.css';
-import SiteBuilder from './site_builder/SiteBuilder';
-import SiteView from './site_builder/SiteView';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-import 'bulma-extensions/bulma-divider/dist/css/bulma-divider.min.css';
-import { faColumns, faBars, faThLarge, faSquare, faMinus, faCode, faFont, faImage, faAlignRight, faAlignCenter, faAlignLeft } from '@fortawesome/free-solid-svg-icons';
-library.add(fab, faColumns, faBars, faThLarge, faSquare, faMinus, faCode, faFont, faImage, faAlignRight, faAlignCenter, faAlignLeft);
+import React from 'react';
+import 'bulma/css/bulma.css';
+import Sidebar from './menu/Sidebar';
+import Site from './site/Site';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { Provider } from "react-redux";
+import { compose } from 'redux';
+import PropTypes from 'prop-types';
+import store from "./redux/store";
+import './SiteBuilder.css';
 
-var App = function (_Component) {
-  _inherits(App, _Component);
+var SiteBuilder = function (_React$Component) {
+  _inherits(SiteBuilder, _React$Component);
 
-  function App() {
-    _classCallCheck(this, App);
+  function SiteBuilder() {
+    _classCallCheck(this, SiteBuilder);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (SiteBuilder.__proto__ || Object.getPrototypeOf(SiteBuilder)).apply(this, arguments));
   }
 
-  _createClass(App, [{
+  _createClass(SiteBuilder, [{
     key: 'render',
     value: function render() {
-      var editable = false;
-      if (this.props.editable != null && this.props.editable == true) {
-        editable = true;
-      }
       return React.createElement(
-        'div',
-        { className: 'App' },
-        editable && React.createElement(SiteBuilder, this.props),
-        !editable && React.createElement(SiteView, this.props)
+        Provider,
+        { store: store },
+        React.createElement(
+          'div',
+          { className: 'container site-container' },
+          React.createElement(
+            'div',
+            { className: 'columns' },
+            React.createElement(
+              'div',
+              { className: 'column is-12' },
+              React.createElement(Site, this.props)
+            )
+          )
+        )
       );
     }
   }]);
 
-  return App;
-}(Component);
+  return SiteBuilder;
+}(React.Component);
 
-export default App;
+export default compose(DragDropContext(HTML5Backend))(SiteBuilder);

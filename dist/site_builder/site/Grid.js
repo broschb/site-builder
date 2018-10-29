@@ -27,8 +27,8 @@ var Grid = function (_React$Component) {
   }
 
   _createClass(Grid, [{
-    key: 'render',
-    value: function render() {
+    key: 'editableRows',
+    value: function editableRows() {
       var self = this;
       var selectContent = this.props.selectContent;
       var activeState = this.props.activeState;
@@ -39,10 +39,32 @@ var Grid = function (_React$Component) {
           React.createElement(
             GridDragSource,
             { key: 'gds-' + index, dragSourceType: DraggableTypes.LAYOUT, sourceId: index.toString(), selectContent: selectContent, activeState: activeState },
-            React.createElement(GridRow, { key: 'gridrow-' + index, row: row, rowId: index })
+            React.createElement(GridRow, Object.assign({ key: 'gridrow-' + index, row: row, rowId: index }, self.props))
           )
         );
       });
+      return rows;
+    }
+  }, {
+    key: 'nonEditableRows',
+    value: function nonEditableRows() {
+      var self = this;
+      var rows = this.props.rows.map(function (row, index) {
+        return React.createElement(GridRow, Object.assign({ key: 'gridrow-' + index, row: row, rowId: index }, self.props));
+      });
+      return rows;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var editable = this.props.editable != null && this.props.editable == true;
+      var self = this;
+      var rows = [];
+      if (editable == true) {
+        rows = this.editableRows();
+      } else {
+        rows = this.nonEditableRows();
+      }
       return React.createElement(
         'div',
         { className: 'column' },

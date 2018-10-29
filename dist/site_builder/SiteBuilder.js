@@ -47,7 +47,7 @@ var SiteBuilder = function (_React$Component) {
             React.createElement(
               'div',
               { className: 'column is-8' },
-              React.createElement(Site, null)
+              React.createElement(Site, this.props)
             )
           )
         )

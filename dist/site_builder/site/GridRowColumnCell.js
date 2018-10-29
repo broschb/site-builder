@@ -36,23 +36,39 @@ var GridRowColumnCell = function (_React$Component) {
   }
 
   _createClass(GridRowColumnCell, [{
-    key: 'render',
-    value: function render() {
+    key: 'renderEditableCell',
+    value: function renderEditableCell() {
       var Comp = Map[this.props.item.itemType];
       var selectContent = this.props.selectContent;
       var key = this.props.item.derivedId;
       return React.createElement(
+        GridDropTarget,
+        { key: 'gdt-key', targetId: this.props.item.derivedId, dropTargetType: DraggableTypes.CONTENT, dropFunction: this.props.addContent },
+        React.createElement(
+          GridDragSource,
+          { key: 'gds-' + key, dragSourceType: DraggableTypes.CONTENT, sourceId: key, selectContent: selectContent, activeState: this.props.activeState },
+          React.createElement(Comp, Object.assign({ key: 'item-' + key, item: this.props.item, derivedId: key, clickHandler: selectContent, updateContentProps: this.props.updateContentProps }, this.props))
+        )
+      );
+    }
+  }, {
+    key: 'renderNonEditableCell',
+    value: function renderNonEditableCell() {
+      var Comp = Map[this.props.item.itemType];
+      var selectContent = this.props.selectContent;
+      var key = this.props.item.derivedId;
+      return React.createElement(Comp, Object.assign({ key: 'item-' + key, item: this.props.item, derivedId: key, clickHandler: selectContent, updateContentProps: this.props.updateContentProps }, this.props));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var editable = this.props.editable != null && this.props.editable == true;
+      return React.createElement(
         'div',
         null,
-        React.createElement(
-          GridDropTarget,
-          { key: 'gdt-key', targetId: this.props.item.derivedId, dropTargetType: DraggableTypes.CONTENT, dropFunction: this.props.addContent },
-          React.createElement(
-            GridDragSource,
-            { key: 'gds-' + key, dragSourceType: DraggableTypes.CONTENT, sourceId: key, selectContent: selectContent, activeState: this.props.activeState },
-            React.createElement(Comp, { key: 'item-' + key, item: this.props.item, derivedId: key, clickHandler: selectContent, updateContentProps: this.props.updateContentProps })
-          )
-        )
+        'TODO handle editable in comps',
+        editable == true && this.renderEditableCell(),
+        editable == false && this.renderNonEditableCell()
       );
     }
   }]);

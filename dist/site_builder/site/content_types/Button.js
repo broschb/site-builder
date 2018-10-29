@@ -38,6 +38,7 @@ var Button = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var editable = this.props.editable != null && this.props.editable == true;
       var alignmentClass = "";
       var value = '<p>Enter Text Here</p>';
       if (this.props.item.itemProperties.button_value != null) {
@@ -57,7 +58,7 @@ var Button = function (_React$Component) {
         React.createElement(
           'a',
           { className: 'button' },
-          React.createElement(TinyMCE, {
+          editable == true && React.createElement(TinyMCE, {
             key: this.props.derivedId,
             content: value,
             config: {
@@ -67,7 +68,8 @@ var Button = function (_React$Component) {
               toolbar1: 'fontselect fontsizeselect forecolor | bold italic underline'
             },
             onChange: this.handleEditorChange
-          })
+          }),
+          editable == false && value
         )
       );
     }

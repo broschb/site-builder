@@ -34,22 +34,24 @@ var GridRowColumn = function (_React$Component) {
         return React.createElement(
           'div',
           { key: key },
-          React.createElement(GridRowColumnCell, { key: 'grcc-' + key, item: item,
+          React.createElement(GridRowColumnCell, Object.assign({ key: 'grcc-' + key, item: item,
             addContent: _this2.props.addContent,
             selectContent: _this2.props.selectContent,
             activeState: _this2.props.activeState,
-            updateContentProps: _this2.props.updateContentProps })
+            updateContentProps: _this2.props.updateContentProps
+          }, _this2.props))
         );
       });
     }
   }, {
     key: 'render',
     value: function render() {
+      var editable = this.props.editable != null && this.props.editable == true;
       var key = this.props.rowId + '.' + this.props.columnId;
       return React.createElement(
         'div',
         null,
-        this.props.columnProps.items.length == 0 && React.createElement(
+        editable && this.props.columnProps.items.length == 0 && React.createElement(
           GridDropTarget,
           { key: 'gdt-' + key, targetId: this.props.rowId + '.' + this.props.columnId, dropTargetType: DraggableTypes.CONTENT, dropFunction: this.props.addContent },
           React.createElement(

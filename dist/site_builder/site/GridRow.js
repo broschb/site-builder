@@ -25,6 +25,7 @@ var GridRow = function (_React$Component) {
     value: function renderColumns() {
       var _this2 = this;
 
+      var self = this;
       var row = this.props.row;
       var parts = row.layoutId.split("_");
       return parts.map(function (item, index) {
@@ -34,7 +35,7 @@ var GridRow = function (_React$Component) {
         return React.createElement(
           'div',
           { key: key, className: className },
-          React.createElement(GridRowColumn, Object.assign({ key: 'grc-' + _this2.props.rowId + '.' + index, rowId: _this2.props.rowId, columnId: index, columnProps: row.columns[index] }, _this2.props))
+          React.createElement(GridRowColumn, Object.assign({ key: 'grc-' + _this2.props.rowId + '.' + index, rowId: _this2.props.rowId, columnId: index, columnProps: row.columns[index] }, self.props))
         );
       });
     }
