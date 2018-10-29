@@ -13,7 +13,7 @@ class Site extends React.Component {
     return (
       <div>
         <SharedSiteProvider>
-          <Grid/>
+          <Grid {...this.props}/>
         </SharedSiteProvider>
       </div>
     )

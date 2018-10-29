@@ -23,7 +23,8 @@ class GridRowColumn extends React.Component {
                                addContent={this.props.addContent} 
                                selectContent={this.props.selectContent}
                                activeState={this.props.activeState}
-                               updateContentProps={this.props.updateContentProps}/>
+                               updateContentProps={this.props.updateContentProps}
+                               {...this.props}/>
           </div>
         )
       })
@@ -31,10 +32,11 @@ class GridRowColumn extends React.Component {
   }
 
   render() {
+    var editable = this.props.editable != null && this.props.editable == true;
     var key = `${this.props.rowId}.${this.props.columnId}`
     return (
       <div>
-        {this.props.columnProps.items.length == 0 && (<GridDropTarget key={`gdt-${key}`} targetId={`${this.props.rowId}.${this.props.columnId}`} dropTargetType={DraggableTypes.CONTENT} dropFunction={this.props.addContent}>
+        {editable && this.props.columnProps.items.length == 0 && (<GridDropTarget key={`gdt-${key}`} targetId={`${this.props.rowId}.${this.props.columnId}`} dropTargetType={DraggableTypes.CONTENT} dropFunction={this.props.addContent}>
           <p className="notification is-primary">Grid Column</p>
         </GridDropTarget>)}
         {this.renderColumnItems()}

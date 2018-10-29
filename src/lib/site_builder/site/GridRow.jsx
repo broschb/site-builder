@@ -10,6 +10,7 @@ class GridRow extends React.Component {
   }
 
   renderColumns(){
+    var self = this;
     var row = this.props.row;
     var parts = row.layoutId.split("_");
     return (
@@ -19,7 +20,7 @@ class GridRow extends React.Component {
         var className = `column is-${item} site-column`
         return (
           <div key={key} className={className}>
-            <GridRowColumn key={`grc-${this.props.rowId}.${index}`} rowId={this.props.rowId} columnId={index} columnProps={row.columns[index]} {...this.props}/>
+            <GridRowColumn key={`grc-${this.props.rowId}.${index}`} rowId={this.props.rowId} columnId={index} columnProps={row.columns[index]} {...self.props}/>
           </div>
         )
       })

@@ -23,6 +23,7 @@ class Button extends React.Component {
   }
 
   render() {
+    var editable = this.props.editable != null && this.props.editable == true;
     var alignmentClass = "";
     var value = '<p>Enter Text Here</p>';
     if (this.props.item.itemProperties.button_value != null){
@@ -39,7 +40,7 @@ class Button extends React.Component {
     return (
       <div className={alignmentClass}> 
         <a className="button"> 
-          <TinyMCE
+          {editable == true && <TinyMCE
             key={this.props.derivedId}
             content={value}
             config={{
@@ -49,7 +50,8 @@ class Button extends React.Component {
               toolbar1: 'fontselect fontsizeselect forecolor | bold italic underline',
             }}
             onChange={this.handleEditorChange}
-          />
+          />}
+          {editable == false && value}
         </a>
       </div>
     )
