@@ -24,17 +24,35 @@ class GridRowColumnCell extends React.Component {
     super(props);
   }
 
-  render() {
+  renderEditableCell(){
     var Comp = Map[this.props.item.itemType]
     var selectContent = this.props.selectContent;
     var key = this.props.item.derivedId;
     return (
+      <GridDropTarget key={`gdt-key`} targetId={this.props.item.derivedId} dropTargetType={DraggableTypes.CONTENT} dropFunction={this.props.addContent}>
+        <GridDragSource key={`gds-${key}`} dragSourceType={DraggableTypes.CONTENT} sourceId={key} selectContent={selectContent} activeState={this.props.activeState}>
+          <Comp key={`item-${key}`} item={this.props.item} derivedId={key} clickHandler={selectContent} updateContentProps={this.props.updateContentProps} {...this.props}/>
+        </GridDragSource>
+      </GridDropTarget>
+    )
+  }
+
+  renderNonEditableCell(){
+    var Comp = Map[this.props.item.itemType]
+    var selectContent = this.props.selectContent;
+    var key = this.props.item.derivedId;
+    return(
+      <Comp key={`item-${key}`} item={this.props.item} derivedId={key} clickHandler={selectContent} updateContentProps={this.props.updateContentProps} {...this.props}/>
+    )
+  }
+
+  render() {
+    var editable = this.props.editable != null && this.props.editable == true;
+    return (
       <div>
-        <GridDropTarget key={`gdt-key`} targetId={this.props.item.derivedId} dropTargetType={DraggableTypes.CONTENT} dropFunction={this.props.addContent}>
-          <GridDragSource key={`gds-${key}`} dragSourceType={DraggableTypes.CONTENT} sourceId={key} selectContent={selectContent} activeState={this.props.activeState}>
-            <Comp key={`item-${key}`} item={this.props.item} derivedId={key} clickHandler={selectContent} updateContentProps={this.props.updateContentProps} />
-          </GridDragSource>
-        </GridDropTarget>
+        TODO handle editable in comps
+        {editable == true && this.renderEditableCell()}
+        {editable == false && this.renderNonEditableCell()}
       </div>
     )
   }

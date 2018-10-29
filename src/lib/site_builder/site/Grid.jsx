@@ -16,19 +16,42 @@ class Grid extends React.Component {
     super(props);
   }
 
-  render() {
+  editableRows(){
     var self = this;
     var selectContent = this.props.selectContent;
     var activeState = this.props.activeState;
-    var rows = this.props.rows.map(function(row, index){
-      return( 
+    var rows = this.props.rows.map(function (row, index) {
+      return (
         <GridDropTarget key={index} targetId={index.toString()} dropTargetType={DraggableTypes.LAYOUT} dropFunction={self.props.addRow}>
           <GridDragSource key={`gds-${index}`} dragSourceType={DraggableTypes.LAYOUT} sourceId={index.toString()} selectContent={selectContent} activeState={activeState}>
-            <GridRow key={`gridrow-${index}`} row={row} rowId={index} />
+            <GridRow key={`gridrow-${index}`} row={row} rowId={index} {...self.props}/>
           </GridDragSource>
         </GridDropTarget>
+
       )
     })
+    return rows;
+  }
+
+  nonEditableRows() {
+    var self = this;
+    var rows = this.props.rows.map(function (row, index) {
+      return (
+            <GridRow key={`gridrow-${index}`} row={row} rowId={index} {...self.props}/>
+      )
+    })
+    return rows;
+  }
+
+  render() {
+    var editable = this.props.editable != null && this.props.editable == true;
+    var self = this;
+    var rows = [];
+    if(editable == true){
+      rows = this.editableRows();
+    }else{
+      rows = this.nonEditableRows();
+    }
     return(
       <div className="column">
         {rows.length > 0 && rows}
