@@ -1,9 +1,9 @@
-import { ADD_ROW, ADD_CONTENT, SELECT_CONTENT, UPDATE_CONTENT_PROPS } from "../../Constants";
+import { ADD_ROW, ADD_CONTENT, SELECT_CONTENT, UPDATE_CONTENT_PROPS, LOAD_SITE_PAGE } from "../../Constants";
 import cloneDeep from 'lodash/cloneDeep';
 
-var tempRows = "[{\"item\":{\n    \"derivedId\": \"0\",\n    \"itemType\": \"Row\",\n    \"itemProperties\": {}\n  },\"layoutId\":\"6_6\",\"columns\":[{\"derivedId\":null,\"items\":[{\"derivedId\":\"0.0.0\",\"itemType\":\"Button\",\"itemProperties\":{}}]},{\"derivedId\":null,\"items\":[]}]},\n  {\n    \"item\":{\n      \"derivedId\": \"1\",\n      \"itemType\": \"Row\",\n      \"itemProperties\": {}\n    },\n    \"layoutId\": \"12\", \"columns\": [{\n      \"derivedId\": null,\n      \"items\": [{\n        \"derivedId\": \"1.0.0\",\n        \"itemType\": \"Button\",\n        \"itemProperties\": {}\n      }]\n    }]\n  }]\n  ";
 var initialState = {
-  rows: JSON.parse(tempRows)
+  rows: [],
+  currentPage: 1
 };
 
 var rootReducer = function rootReducer() {
@@ -19,9 +19,18 @@ var rootReducer = function rootReducer() {
       return selectContent(state, action);
     case UPDATE_CONTENT_PROPS:
       return updateContentProps(state, action);
+    case LOAD_SITE_PAGE:
+      return loadSitePage(state, action);
     default:
       return state;
   }
+};
+
+var loadSitePage = function loadSitePage(state, action) {
+  return Object.assign({}, state, {
+    currentPage: action.payload.id,
+    rows: action.payload.data
+  });
 };
 
 var updateContentProps = function updateContentProps(state, action) {

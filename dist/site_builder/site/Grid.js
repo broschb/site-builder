@@ -9,7 +9,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { addRow as _addRow, selectContent as _selectContent } from "../redux/actions/index";
+import { addRow as _addRow, selectContent as _selectContent, loadSitePage as _loadSitePage } from "../redux/actions/index";
 import GridRow from './GridRow';
 import GridDropTarget from './GridDropTarget';
 import GridDragSource from './GridDragSource';
@@ -27,6 +27,14 @@ var Grid = function (_React$Component) {
   }
 
   _createClass(Grid, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var api = this.props.api;
+      var site = this.props.site;
+      var pageData = api.loadSitePage(site.id, this.props.currentPage);
+      this.props.loadSitePage(pageData);
+    }
+  }, {
     key: 'editableRows',
     value: function editableRows() {
       var self = this;
@@ -83,11 +91,13 @@ var Grid = function (_React$Component) {
 
 Grid.propTypes = {
   rows: PropTypes.array,
-  activeState: PropTypes.object
+  activeState: PropTypes.object,
+  site: PropTypes.object,
+  currentPage: PropTypes.number
 };
 
 function mapStateToProps(state, ownProps) {
-  return { rows: state.rows, activeState: state.activeState };
+  return { rows: state.rows, activeState: state.activeState, currentPage: state.currentPage };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -97,6 +107,9 @@ function mapDispatchToProps(dispatch) {
     },
     selectContent: function selectContent(content) {
       return dispatch(_selectContent(content));
+    },
+    loadSitePage: function loadSitePage(page) {
+      return dispatch(_loadSitePage(page));
     }
   };
 };

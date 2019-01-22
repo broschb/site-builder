@@ -16,10 +16,7 @@ var Site = function (_React$Component) {
   function Site(props) {
     _classCallCheck(this, Site);
 
-    var _this = _possibleConstructorReturn(this, (Site.__proto__ || Object.getPrototypeOf(Site)).call(this, props));
-
-    _this.state = { editable: true };
-    return _this;
+    return _possibleConstructorReturn(this, (Site.__proto__ || Object.getPrototypeOf(Site)).call(this, props));
   }
 
   _createClass(Site, [{

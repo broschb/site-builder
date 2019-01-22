@@ -9,6 +9,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React from 'react';
 import 'bulma/css/bulma.css';
 import Sidebar from './menu/Sidebar';
+import NavigationHeader from './menu/navigation/NavigationHeader';
 import Site from './site/Site';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -21,10 +22,10 @@ import './SiteBuilder.css';
 var SiteBuilder = function (_React$Component) {
   _inherits(SiteBuilder, _React$Component);
 
-  function SiteBuilder() {
+  function SiteBuilder(props) {
     _classCallCheck(this, SiteBuilder);
 
-    return _possibleConstructorReturn(this, (SiteBuilder.__proto__ || Object.getPrototypeOf(SiteBuilder)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (SiteBuilder.__proto__ || Object.getPrototypeOf(SiteBuilder)).call(this, props));
   }
 
   _createClass(SiteBuilder, [{
@@ -36,6 +37,7 @@ var SiteBuilder = function (_React$Component) {
         React.createElement(
           'div',
           { className: 'container site-container' },
+          React.createElement(NavigationHeader, this.props),
           React.createElement(
             'div',
             { className: 'columns' },

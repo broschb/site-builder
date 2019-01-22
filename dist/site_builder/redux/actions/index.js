@@ -1,4 +1,4 @@
-import { ADD_ROW, ADD_CONTENT, SELECT_CONTENT, UPDATE_CONTENT_PROPS } from "../../Constants";
+import { ADD_ROW, ADD_CONTENT, SELECT_CONTENT, UPDATE_CONTENT_PROPS, LOAD_SITE_PAGE } from "../../Constants";
 
 export var addRow = function addRow(row) {
   return {
@@ -24,6 +24,13 @@ export var selectContent = function selectContent(content) {
 export var updateContentProps = function updateContentProps(content) {
   return {
     type: UPDATE_CONTENT_PROPS,
+    payload: content
+  };
+};
+
+export var loadSitePage = function loadSitePage(content) {
+  return {
+    type: LOAD_SITE_PAGE,
     payload: content
   };
 };
