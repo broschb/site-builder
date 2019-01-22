@@ -15,17 +15,15 @@ class NavigationHeader extends React.Component {
   }
 
   savePage() {
-    this.props.api.savePage(this.props.site.id, this.props.currentPage, this.props.rows);
+    this.props.api.savePage(this.props.site.id, this.props.currentPage, this.props.rows, function(){});
   }
 
   newPage(){
-    var pageData = this.props.api.newPage(this.props.site.id);
-    this.props.loadSitePage(pageData);
+    this.props.api.newPage(this.props.site.id, this.props.loadSitePage);
   }
 
   selectPage(pageId){
-    var pageData = this.props.api.loadSitePage(this.props.site.id, pageId);
-    this.props.loadSitePage(pageData);
+    this.props.api.loadSitePage(this.props.site.id, pageId, this.props.loadSitePage);
   }
 
   render() {

@@ -19,8 +19,7 @@ class Grid extends React.Component {
   componentDidMount(){
     let api = this.props.api;
     let site = this.props.site;
-    var pageData = api.loadSitePage(site.id, this.props.currentPage);
-    this.props.loadSitePage(pageData);
+    api.loadSitePage(site.id, this.props.currentPage, this.props.loadSitePage);
   }
 
   editableRows(){

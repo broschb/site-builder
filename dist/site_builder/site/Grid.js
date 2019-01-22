@@ -31,8 +31,7 @@ var Grid = function (_React$Component) {
     value: function componentDidMount() {
       var api = this.props.api;
       var site = this.props.site;
-      var pageData = api.loadSitePage(site.id, this.props.currentPage);
-      this.props.loadSitePage(pageData);
+      api.loadSitePage(site.id, this.props.currentPage, this.props.loadSitePage);
     }
   }, {
     key: 'editableRows',

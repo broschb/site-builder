@@ -30,19 +30,17 @@ var NavigationHeader = function (_React$Component) {
   _createClass(NavigationHeader, [{
     key: 'savePage',
     value: function savePage() {
-      this.props.api.savePage(this.props.site.id, this.props.currentPage, this.props.rows);
+      this.props.api.savePage(this.props.site.id, this.props.currentPage, this.props.rows, function () {});
     }
   }, {
     key: 'newPage',
     value: function newPage() {
-      var pageData = this.props.api.newPage(this.props.site.id);
-      this.props.loadSitePage(pageData);
+      this.props.api.newPage(this.props.site.id, this.props.loadSitePage);
     }
   }, {
     key: 'selectPage',
     value: function selectPage(pageId) {
-      var pageData = this.props.api.loadSitePage(this.props.site.id, pageId);
-      this.props.loadSitePage(pageData);
+      this.props.api.loadSitePage(this.props.site.id, pageId, this.props.loadSitePage);
     }
   }, {
     key: 'render',

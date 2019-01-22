@@ -42,16 +42,16 @@ const tempRows1 = `[{"item":{
 
   const pages = [tempRows1, tempRows2, tempRows3]
 
-export function savePage(siteId, pageId, rows) {
-  return "";
+export function savePage(siteId, pageId, rows, callback) {
+  callback("");
 }
 
-export function newPage(siteId){
-  return {data: [], id: 3, name: "new page"}
+export function newPage(siteId, callback) {
+  callback({data: [], id: 3, name: "new page"})
 }
 
-export function loadSitePage(siteId, pageId){
+export function loadSitePage(siteId, pageId, callback){
   var pageData = JSON.parse(pages[pageId - 1])
   var page = {data: pageData, id: pageId, name: "name"}
-  return page;
+  callback(page)
 }
