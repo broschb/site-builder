@@ -1,29 +1,10 @@
-import {ADD_ROW, ADD_CONTENT, SELECT_CONTENT, UPDATE_CONTENT_PROPS} from "../../Constants";
+import {ADD_ROW, ADD_CONTENT, SELECT_CONTENT, UPDATE_CONTENT_PROPS, LOAD_SITE_PAGE} from "../../Constants";
 import cloneDeep from 'lodash/cloneDeep';
 
-const tempRows = `[{"item":{
-    "derivedId": "0",
-    "itemType": "Row",
-    "itemProperties": {}
-  },"layoutId":"6_6","columns":[{"derivedId":null,"items":[{"derivedId":"0.0.0","itemType":"Button","itemProperties":{}}]},{"derivedId":null,"items":[]}]},
-  {
-    "item":{
-      "derivedId": "1",
-      "itemType": "Row",
-      "itemProperties": {}
-    },
-    "layoutId": "12", "columns": [{
-      "derivedId": null,
-      "items": [{
-        "derivedId": "1.0.0",
-        "itemType": "Button",
-        "itemProperties": {}
-      }]
-    }]
-  }]
-  `
+
 const initialState = {
-  rows:JSON.parse(tempRows)
+  rows:[],
+  currentPage: 1
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -36,10 +17,19 @@ const rootReducer = (state = initialState, action) => {
        return selectContent(state, action);
     case UPDATE_CONTENT_PROPS:
         return updateContentProps(state, action);
+    case LOAD_SITE_PAGE:
+        return loadSitePage(state, action);
     default:
       return state;
   }
 };
+
+const loadSitePage = (state, action) => {
+  return { ...state,
+    currentPage: action.payload.id,
+    rows: action.payload.data
+  }
+}
 
 const updateContentProps = (state, action) => {
   var rows = cloneDeep(state.rows);

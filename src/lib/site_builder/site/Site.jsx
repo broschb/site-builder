@@ -6,7 +6,6 @@ class Site extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {editable: true};
   }
 
   render() {

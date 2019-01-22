@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { addRow, selectContent } from "../redux/actions/index";
+import { addRow, selectContent, loadSitePage } from "../redux/actions/index";
 import GridRow from './GridRow';
 import GridDropTarget from './GridDropTarget';
 import GridDragSource from './GridDragSource';
@@ -14,6 +14,13 @@ class Grid extends React.Component {
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount(){
+    let api = this.props.api;
+    let site = this.props.site;
+    var pageData = api.loadSitePage(site.id, this.props.currentPage);
+    this.props.loadSitePage(pageData);
   }
 
   editableRows(){
@@ -67,17 +74,20 @@ class Grid extends React.Component {
 
 Grid.propTypes = {
   rows: PropTypes.array,
-  activeState: PropTypes.object
+  activeState: PropTypes.object,
+  site: PropTypes.object,
+  currentPage: PropTypes.number
 };
 
 function mapStateToProps(state, ownProps) {
-  return { rows: state.rows, activeState: state.activeState }
+  return { rows: state.rows, activeState: state.activeState, currentPage: state.currentPage }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     addRow: row => dispatch(addRow(row)),
     selectContent: content => dispatch(selectContent(content)),
+    loadSitePage: page => dispatch(loadSitePage(page))
   };
 };
 
