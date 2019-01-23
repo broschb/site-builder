@@ -28,6 +28,13 @@ var NavigationHeader = function (_React$Component) {
   }
 
   _createClass(NavigationHeader, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.site.pages != null && this.props.site.pages.length > 0) {
+        this.props.api.loadSitePage(this.props.site.id, this.props.site.pages[0].id, this.props.loadSitePage);
+      }
+    }
+  }, {
     key: 'savePage',
     value: function savePage() {
       this.props.api.savePage(this.props.site.id, this.props.currentPage, this.props.rows, function () {});

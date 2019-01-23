@@ -27,13 +27,6 @@ var Grid = function (_React$Component) {
   }
 
   _createClass(Grid, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var api = this.props.api;
-      var site = this.props.site;
-      api.loadSitePage(site.id, this.props.currentPage, this.props.loadSitePage);
-    }
-  }, {
     key: 'editableRows',
     value: function editableRows() {
       var self = this;

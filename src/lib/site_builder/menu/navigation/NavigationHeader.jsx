@@ -14,6 +14,12 @@ class NavigationHeader extends React.Component {
     this.selectPage = this.selectPage.bind(this);
   }
 
+  componentDidMount(){
+    if (this.props.site.pages != null && this.props.site.pages.length > 0){
+      this.props.api.loadSitePage(this.props.site.id, this.props.site.pages[0].id, this.props.loadSitePage);
+    }
+  }
+
   savePage() {
     this.props.api.savePage(this.props.site.id, this.props.currentPage, this.props.rows, function(){});
   }
